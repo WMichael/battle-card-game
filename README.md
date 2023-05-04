@@ -1,48 +1,34 @@
-# Battle Card Game
-
-This is a simple card game built using React. The game is called Battle Card Game and is based on the popular card game "War".
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-To get started with the project, first clone the repository to your local machine:
+First, run the development server:
 
-```
-git clone https://github.com/WMichael/battle-card-game
-```
-
-Once you have the repository on your local machine, navigate to the project directory and install the dependencies using npm:
-
-```
-cd battle-card-game
-npm install
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-## Running the Game
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To start the game, run the following command:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-npm start
-```
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-This will launch the game in your default web browser. You can now play the game by following the on-screen instructions.
+## Learn More
 
-## Testing
+To learn more about Next.js, take a look at the following resources:
 
-To run the unit tests for the project, use the following command:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```
-npm test
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-This will run all of the tests in the project and report the results in the console.
+## Deploy on Vercel
 
-## Building the Project
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-To build the project for deployment, use the following command:
-
-```
-npm run build
-```
-
-This will create a production-ready build of the project in the `build` directory.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
