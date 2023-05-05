@@ -1,0 +1,16 @@
+html, body {
+    background-color: lightgray;
+    height: auto;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 2px;
+}
+header h2 {
+    margin-top: 2px;
+}
+
