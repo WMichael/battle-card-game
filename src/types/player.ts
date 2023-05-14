@@ -1,7 +1,7 @@
 import Card from "./card";
 
 type Player = {
-    hand: Card[];
+    hand: Card | undefined;
     deck: Card[];
 }
 

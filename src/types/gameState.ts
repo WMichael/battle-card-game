@@ -6,7 +6,7 @@ type GameState = {
         player2: Player;
     };
     won: boolean;
-    winner: Player | null;
+    winner: Player | undefined;
 }
 
 export default GameState;
