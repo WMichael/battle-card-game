@@ -2,3 +2,7 @@
     text-align: center;
     color: white;
 }
+
+.log .message {
+    text-align: left;
+}

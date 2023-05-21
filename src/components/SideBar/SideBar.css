@@ -8,7 +8,7 @@
     box-sizing: border-box;
     margin: auto;
     margin-right: 1vw;
-    overflow-y:auto;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }

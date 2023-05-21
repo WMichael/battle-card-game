@@ -6,25 +6,25 @@ import Player from "@/types/player";
 enum LogMessages {
 	INITIALISE_GAME = "Game started",
 	DRAW_CARDS = "Cards drawn",
-	AWARD_CARDS = "Cards awarded",
-	GAME_WON = "Game won",
+	AWARD_CARDS = " won the round",
+	GAME_WON = "Game won by ",
 	GAME_LOST = "Game lost",
 }
 
 export function initaliseGame(): GameState {
 	const mainDeck: Card[] = initialiseMainDeck();
-	const play1Deck: Card[] = mainDeck.slice(0, 26);
-	const play2Deck: Card[] = mainDeck.slice(26, 52);
+	const computerDeck: Card[] = mainDeck.slice(0, 26);
+	const playerDeck: Card[] = mainDeck.slice(26, 52);
 
 	return {
 		players: {
-			player1: {
+			computer: {
 				hand: undefined,
-				deck: play1Deck,
+				deck: computerDeck,
 			},
-			player2: {
+			player: {
 				hand: undefined,
-				deck: play2Deck,
+				deck: playerDeck,
 			},
 		},
 		won: false,
@@ -34,40 +34,44 @@ export function initaliseGame(): GameState {
 }
 
 export function drawCards(state: GameState): GameState {
-	const playerCard1 = state.players.player1.deck.pop();
-	const playerCard2 = state.players.player2.deck.pop();
-	if (playerCard1 && playerCard2) {
+	if (!state.players.computer.hand && !state.players.player.hand) {
+	const computerCard = state.players.computer.deck.pop();
+	const playerCard = state.players.player.deck.pop();
+	if (computerCard && playerCard) {
 		return {
             ...state,
             players: {
-                player1: {
-                    ...state.players.player1,
-                    hand: playerCard1
+                computer: {
+                    ...state.players.computer,
+                    hand: computerCard
                 },
-                player2: {
-                    ...state.players.player2,
-                    hand: playerCard2
+                player: {
+                    ...state.players.player,
+                    hand: playerCard
                 }
             },
 			messages: [LogMessages.DRAW_CARDS, ...state.messages]
         };
 	}
+	}
 	return state;
 }
 
 export function checkIfGameWon(state: GameState): GameState {
-	if (state.players.player1.deck.length === 0) {
+	if (state.players.computer.deck.length === 0) {
 		return {
 			...state,
 			won: true,
-			winner: state.players.player2,
+			winner: state.players.player,
+			messages: [LogMessages.GAME_WON + 'Player', ...state.messages]
 		};
 	}
-	if (state.players.player2.deck.length === 0) {
+	if (state.players.player.deck.length === 0) {
 		return {
 			...state,
 			won: true,
-			winner: state.players.player1,
+			winner: state.players.computer,
+			messages: [LogMessages.GAME_WON + 'Computer', ...state.messages]
 		};
 	}
 	return state;
@@ -75,9 +79,9 @@ export function checkIfGameWon(state: GameState): GameState {
 
 export function awardCards(state: GameState): GameState {
 const winningPlayer = compareCards(state);
-const { player1, player2 } = state.players;
-const { hand: hand1, deck: deck1 } = player1;
-const { hand: hand2, deck: deck2 } = player2;
+const { computer: computer, player: player } = state.players;
+const { hand: hand1, deck: deck1 } = computer;
+const { hand: hand2, deck: deck2 } = player;
 
 if (!hand1 || !hand2) {
   throw new Error("No cards left in one or both hands");
@@ -92,25 +96,26 @@ if (winningPlayer) {
 return {
   ...state,
   players: {
-    player1: { ...player1, deck: deck1, hand: undefined },
-    player2: { ...player2, deck: deck2, hand: undefined },
+    computer: { ...computer, deck: deck1, hand: undefined },
+    player: { ...player, deck: deck2, hand: undefined },
   },
+  messages: [winningPlayer + LogMessages.AWARD_CARDS, ...state.messages],
 };
 }
 
-export function compareCards(state: GameState): boolean {
-	const player1Card = state.players.player1.hand;
-	const player2Card = state.players.player2.hand;
-	if (player1Card && player2Card) {
-		if (player1Card.value > player2Card.value) {
-			return true;
+function compareCards(state: GameState): string {
+	const computerCard = state.players.computer.hand;
+	const playerCard = state.players.player.hand;
+	if (computerCard && playerCard) {
+		if (computerCard.value > playerCard.value) {
+			return 'Computer';
 		}
-		if (player1Card.value < player2Card.value) {
-			return false;
+		if (computerCard.value < playerCard.value) {
+			return 'Player';
 		}
-		return player1Card.suit > player2Card.suit
-			? true
-			: false;
+		return computerCard.suit > playerCard.suit
+			? 'Computer'
+			: 'Player';
 	} else {
 		throw new Error("No cards left in one or both hands");
 	}

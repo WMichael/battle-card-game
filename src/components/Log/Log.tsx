@@ -10,7 +10,7 @@ export default function Log({messages}: LogProps) {
         <div className="log">
             <p>~ The game log ~</p>
             {messages?.map((message, index) => (
-                <p key={index}>{message}</p>
+                <p className='message' key={index}>- {message}</p>
             ))}
         </div>
     );

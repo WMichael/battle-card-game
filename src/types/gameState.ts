@@ -2,8 +2,8 @@ import Player from "./player";
 
 type GameState = {
     players: { 
-        player1: Player;
-        player2: Player;
+        computer: Player;
+        player: Player;
     };
     won: boolean;
     winner: Player | undefined;

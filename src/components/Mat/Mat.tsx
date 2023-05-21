@@ -13,8 +13,8 @@ export default function Mat(props: MatProps) {
 
   return (
     <div className="mat">
-      <PlayerSpace handleDrawCards={handleDrawCards} hand={gameState.players.player1.hand}></PlayerSpace>
-      <PlayerSpace handleDrawCards={handleDrawCards} hand={gameState.players.player2.hand}></PlayerSpace>
+      <PlayerSpace handleDrawCards={handleDrawCards} computer={true} isGameOver={gameState.won} hand={gameState.players.computer.hand}></PlayerSpace>
+      <PlayerSpace handleDrawCards={handleDrawCards} computer={false} isGameOver={gameState.won} hand={gameState.players.player.hand}></PlayerSpace>
     </div>
   );
 }
