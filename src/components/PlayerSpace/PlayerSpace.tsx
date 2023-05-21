@@ -1,17 +1,23 @@
 import Card from '@/types/card';
-import GameState from '@/types/gameState';
 import Image from 'next/image';
+import "./PlayerSpace.css";
 
 interface PlayerSpaceProps {
-	hand?: Card;
+	hand: Card | undefined;
+	handleDrawCards: () => void;
 };
 
-export default function PlayerSpace({hand}: PlayerSpaceProps ): JSX.Element {
+export default function PlayerSpace({hand, handleDrawCards}: PlayerSpaceProps ): JSX.Element {
 	return (
-	<div className="card">
-		{hand && (
-			<Image src={`cards/${hand.value}-${hand.suit}.png`} width={105} height={130}alt="My Image" />
-		)}
+	<div className="cards">
+		<div className='card'>
+			<Image onClick={handleDrawCards} className='cardImage' src={'cards/back.png'} fill alt="My Image" />
+		</div>
+		<div className="card">
+			{hand && (
+				<Image className='cardImage' src={`cards/${hand.value}-${hand.suit}.png`} fill alt="My Image" />
+			)}
+		</div>
 	</div>
 );
 }

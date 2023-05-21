@@ -7,6 +7,7 @@ type GameState = {
     };
     won: boolean;
     winner: Player | undefined;
+    messages: string[];
 }
 
 export default GameState;
